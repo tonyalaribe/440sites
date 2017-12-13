@@ -1,16 +1,32 @@
-package rpc
+package msgQueue
 
 import (
 	"bytes"
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"os/exec"
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
+	stan "github.com/nats-io/go-nats-streaming"
 	"github.com/tonyalaribe/440sites/config"
 	"github.com/tonyalaribe/440sites/utils"
+	"github.com/tonyalaribe/shop440/shops"
 )
+
+func NewSiteHandler(msg *stan.Msg) {
+	// Handle the message
+	log.Printf(" DATA:  %+v\n", msg)
+	shop := shops.Shop{}
+	json.Unmarshal(msg.Data, &shop)
+	err := NewSite(shop.ShopID)
+	if err != nil {
+		log.Println(err)
+
+	}
+
+}
 
 //NewSite runs the hugo new command and generates a new site at given location
 func NewSite(shopid string) error {
