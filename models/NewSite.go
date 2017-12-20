@@ -1,4 +1,4 @@
-package rpc
+package models
 
 import (
 	"bytes"

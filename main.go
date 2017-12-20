@@ -10,6 +10,11 @@ import (
 	"github.com/tonyalaribe/440sites/web"
 )
 
+func init() {
+	// to change the flags on the default logger
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+}
+
 func main() {
 	config.Init() //Init Config.yaml
 	// msgQueue.Init()
