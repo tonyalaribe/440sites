@@ -17,6 +17,15 @@ func NewSiteHandler(msg *stan.Msg) {
 	err := models.NewSite(shop.ShopID)
 	if err != nil {
 		log.Println(err)
+	}
+}
 
+func AddADomainHandler(msg *stan.Msg) {
+	message := make(map[string]interface{})
+	json.Unmarshal(msg.Data, &message)
+	message["shop_id"]
+	err := models.AddCustomDomain(message["shop_id"].(string), message["domain"].(string))
+	if err != nil {
+		log.Println(err)
 	}
 }

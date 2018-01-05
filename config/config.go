@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/dgraph-io/badger"
 	stan "github.com/nats-io/go-nats-streaming"
 )
 
@@ -15,6 +16,9 @@ const (
 type Conf struct {
 	Nats     stan.Conn
 	SitesDir string
+
+	BadgerDB map[string]*badger.DB
+	// BleveIndexes map[string]bleve.Index
 }
 
 var config = Conf{}
