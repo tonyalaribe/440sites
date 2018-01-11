@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/tonyalaribe/440sites/config"
-	"github.com/tonyalaribe/440sites/rpc"
 	"github.com/tonyalaribe/440sites/web"
 )
 
@@ -17,13 +16,6 @@ func init() {
 
 func main() {
 	config.Init() //Init Config.yaml
-	// msgQueue.Init()
-	RPC_PORT := os.Getenv("RPC_PORT")
-	if RPC_PORT == "" {
-		RPC_PORT = "9001"
-	}
-	log.Println("RPC port:", RPC_PORT)
-	go rpc.StartRPCServer(RPC_PORT)
 
 	router := web.StartRouter()
 	PORT := os.Getenv("PORT")
