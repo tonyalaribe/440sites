@@ -6,12 +6,12 @@ import (
 
 	stan "github.com/nats-io/go-nats-streaming"
 	"github.com/tonyalaribe/440sites/models"
-	"github.com/tonyalaribe/shop440/shops"
+	"github.com/tonyalaribe/shop440/features/shops"
 )
 
 func NewSiteHandler(msg *stan.Msg) {
 	// Handle the message
-	log.Printf(" DATA:  %+v\n", msg)
+	log.Printf(" new site for data DATA:  %+v\n", msg)
 	shop := shops.Shop{}
 	json.Unmarshal(msg.Data, &shop)
 	err := models.NewSite(shop.ShopID)
@@ -21,9 +21,9 @@ func NewSiteHandler(msg *stan.Msg) {
 }
 
 func AddADomainHandler(msg *stan.Msg) {
+	log.Println("add custom domain for new site")
 	message := make(map[string]interface{})
 	json.Unmarshal(msg.Data, &message)
-	message["shop_id"]
 	err := models.AddCustomDomain(message["shop_id"].(string), message["domain"].(string))
 	if err != nil {
 		log.Println(err)

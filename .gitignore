@@ -1,3 +1,8 @@
 sites/
 logger/
 database/
+.DS_Store
+.r.logs.log
+.r.outputs.log
+msgQueue/.DS_Store
+test_sites/
