@@ -14,8 +14,9 @@ const (
 )
 
 type Conf struct {
-	Nats     stan.Conn
-	SitesDir string
+	Nats      stan.Conn
+	SitesDir  string
+	ThemesDir string
 
 	BadgerDB map[string]*badger.DB
 	// BleveIndexes map[string]bleve.Index
@@ -25,6 +26,7 @@ var config = Conf{}
 
 func Init() {
 	var err error
+	config.ThemesDir = "./defaults"
 	config.SitesDir = os.Getenv("SITES_ROOT")
 	if config.SitesDir == "" {
 		config.SitesDir = "./sites"
